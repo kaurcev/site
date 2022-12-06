@@ -22,19 +22,28 @@
         </div>
     </header>
     <main>
-        <script type="text/javascript" src="https://vk.com/js/api/openapi.js?168"></script>
-        <div id="vk_community_messages"></div>
-        <script type="text/javascript">
-            VK.Widgets.CommunityMessages("vk_community_messages", 202486679, {
-                tooltipButtonText: "Есть вопрос?",
-                widgetPosition: "left",
-                expanded: 1
-            });
-        </script>
+        <div class="content">
+            <div class="panel">
+
+            </div>
+            <div id="vk_groups"></div>
+        </div>
+
+
     </main>
     <footer>
         <div class="footer">kaurcev.tk</div>
     </footer>
+    <script type="text/javascript">
+        VK.Widgets.Group("vk_groups", {
+            mode: 4,
+            wide: 1,
+            height: 500,
+            color1: "f2f4f8",
+            color2: "131313",
+            color3: "003cff"
+        }, 202486679);
+    </script>
 </body>
 
 </html>

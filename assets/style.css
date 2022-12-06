@@ -1,205 +1,222 @@
-    * {
-        box-sizing: border-box;
-    }
-    
-    @font-face {
-        font-family: "Raleway-Medium";
-        src: url("/fonts/Raleway-Medium.ttf") format("truetype");
-        font-style: normal;
-        font-weight: normal;
-    }
-    
-    @font-face {
-        font-family: "Raleway-Light";
-        src: url("/fonts/Raleway-Light.ttf") format("truetype");
-        font-style: normal;
-        font-weight: normal;
-    }
-    
-    @font-face {
-        font-family: "Raleway-Black";
-        src: url("/fonts/Raleway-Black.ttf") format("truetype");
-        font-style: normal;
-        font-weight: normal;
-    }
-    
-    @font-face {
-        font-family: "Raleway-SemiBold";
-        src: url("/fonts/Raleway-SemiBold.ttf") format("truetype");
-        font-style: normal;
-        font-weight: normal;
-    }
-    
-    @font-face {
-        font-family: "Raleway-ExtraBold";
-        src: url("/fonts/Raleway-ExtraBold.ttf") format("truetype");
-        font-style: normal;
-        font-weight: normal;
-    }
-    
-    @font-face {
-        font-family: "Raleway-Bold";
-        src: url("/fonts/Raleway-Bold.ttf") format("truetype");
-        font-style: normal;
-        font-weight: normal;
-    }
-    
-    @font-face {
-        font-family: "Raleway-Regular";
-        src: url("/fonts/Raleway-Regular.ttf") format("truetype");
-        font-style: normal;
-        font-weight: normal;
-    }
-    
-    @font-face {
-        font-family: "Raleway-Light";
-        src: url("/fonts/Raleway-Light.ttf") format("truetype");
-        font-style: normal;
-        font-weight: normal;
-    }
-    
-    html,
-    body {
-        background-color: #f2f4f8;
-        color: #212121;
-        font-size: 16px;
-        font-family: "Raleway-Regular";
-        margin: 0px;
-        padding: 0px;
-    }
-    
-    .panel {
-        background-color: #ffffff;
-        padding: 10px;
-        width: 100%;
-        border-radius: 10px;
-        margin-bottom: 10px;
-    }
-    
-    form {
-        background-color: #fff;
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        max-width: 300px;
-        min-height: 200px;
-        justify-content: space-between;
-        padding: 10px;
-        border-radius: 10px;
-        margin: 0 auto;
-    }
-    
-    input {
-        background-color: #f2f4f850;
-        border-radius: 10px;
-        padding: 5px;
-        font-size: 16px;
-        font-family: "Raleway-Regular";
-        border: #dddddd solid 2px;
-        outline: none;
-        margin-bottom: 5px;
-    }
-    
-    textarea {
-        background-color: #f2f4f850;
-        border-radius: 10px;
-        padding: 5px;
-        font-size: 16px;
-        font-family: "Raleway-Regular";
-        border: #dddddd solid 2px;
-        outline: none;
-        margin-bottom: 5px;
-    }
-    
-    button {
-        background-color: #003cff;
-        color: #fff;
-        border-radius: 10px;
-        padding: 5px;
-        font-size: 16px;
-        font-family: "Raleway-Medium";
-        border: #003cff solid 2px;
-    }
-    
-    main {
-        width: 100%;
-        max-width: 1000px;
-        margin: 0 auto;
-        margin-top: 60px;
-        padding: 10px;
-        min-height: 70vh;
-    }
-    
-    .mini {
-        font-size: 12px;
-        opacity: 1;
-        font-family: "Raleway-Light";
-    }
-    
-    .center {
-        text-align: center;
-    }
-    
-    .centered {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 80vh;
-        width: 100%;
-    }
-    
-    header {
-        background-color: #fff;
-        position: fixed;
-        top: 0px;
-        left: 0px;
-        width: 100%;
-        padding: 10px;
-    }
-    
-    .header {
-        width: 100%;
-        max-width: 1000px;
-        display: flex;
-        margin: 0 auto;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-    }
-    
-    a {
-        color: #003cff;
-        text-decoration: none;
-        font-family: "Raleway-Medium";
-    }
-    
-    img {
-        width: 100%;
-        border-radius: 5px;
-    }
-    
-    .row {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        flex-wrap: wrap;
-    }
-    
-    footer {
-        background-color: #131313;
-        color: #f2f4f8;
-        padding: 10px;
-        min-height: 25vh;
-    }
-    
-    .footer {
-        width: 100%;
-        max-width: 1000px;
-        display: flex;
-        margin: 0 auto;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 14px;
-    }
+            * {
+                box-sizing: border-box;
+            }
+            
+            @font-face {
+                font-family: "Raleway-Medium";
+                src: url("/fonts/Raleway-Medium.ttf") format("truetype");
+                font-style: normal;
+                font-weight: normal;
+            }
+            
+            @font-face {
+                font-family: "Raleway-Light";
+                src: url("/fonts/Raleway-Light.ttf") format("truetype");
+                font-style: normal;
+                font-weight: normal;
+            }
+            
+            @font-face {
+                font-family: "Raleway-Black";
+                src: url("/fonts/Raleway-Black.ttf") format("truetype");
+                font-style: normal;
+                font-weight: normal;
+            }
+            
+            @font-face {
+                font-family: "Raleway-SemiBold";
+                src: url("/fonts/Raleway-SemiBold.ttf") format("truetype");
+                font-style: normal;
+                font-weight: normal;
+            }
+            
+            @font-face {
+                font-family: "Raleway-ExtraBold";
+                src: url("/fonts/Raleway-ExtraBold.ttf") format("truetype");
+                font-style: normal;
+                font-weight: normal;
+            }
+            
+            @font-face {
+                font-family: "Raleway-Bold";
+                src: url("/fonts/Raleway-Bold.ttf") format("truetype");
+                font-style: normal;
+                font-weight: normal;
+            }
+            
+            @font-face {
+                font-family: "Raleway-Regular";
+                src: url("/fonts/Raleway-Regular.ttf") format("truetype");
+                font-style: normal;
+                font-weight: normal;
+            }
+            
+            @font-face {
+                font-family: "Raleway-Light";
+                src: url("/fonts/Raleway-Light.ttf") format("truetype");
+                font-style: normal;
+                font-weight: normal;
+            }
+            
+            html,
+            body {
+                background-color: #f2f4f8;
+                color: #212121;
+                font-size: 16px;
+                font-family: "Raleway-Regular";
+                margin: 0px;
+                padding: 0px;
+            }
+            
+            .panel {
+                background-color: #ffffff;
+                padding: 10px;
+                width: 100%;
+                border-radius: 10px;
+                margin-bottom: 10px;
+                min-height: 200px;
+            }
+            
+            form {
+                background-color: #fff;
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                max-width: 300px;
+                min-height: 200px;
+                justify-content: space-between;
+                padding: 10px;
+                border-radius: 10px;
+                margin: 0 auto;
+            }
+            
+            input {
+                background-color: #f2f4f850;
+                border-radius: 10px;
+                padding: 5px;
+                font-size: 16px;
+                font-family: "Raleway-Regular";
+                border: #dddddd solid 2px;
+                outline: none;
+                margin-bottom: 5px;
+            }
+            
+            textarea {
+                background-color: #f2f4f850;
+                border-radius: 10px;
+                padding: 5px;
+                font-size: 16px;
+                font-family: "Raleway-Regular";
+                border: #dddddd solid 2px;
+                outline: none;
+                margin-bottom: 5px;
+            }
+            
+            button {
+                background-color: #003cff;
+                color: #fff;
+                border-radius: 10px;
+                padding: 5px;
+                font-size: 16px;
+                font-family: "Raleway-Medium";
+                border: #003cff solid 2px;
+            }
+            
+            main {
+                width: 100%;
+                max-width: 1000px;
+                margin: 0 auto;
+                margin-top: 60px;
+                padding: 10px;
+                min-height: 70vh;
+            }
+            
+            .mini {
+                font-size: 12px;
+                opacity: 1;
+                font-family: "Raleway-Light";
+            }
+            
+            .center {
+                text-align: center;
+            }
+            
+            .centered {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                height: 80vh;
+                width: 100%;
+            }
+            
+            header {
+                background-color: #fff;
+                position: fixed;
+                top: 0px;
+                left: 0px;
+                width: 100%;
+                padding: 10px;
+            }
+            
+            .header {
+                width: 100%;
+                max-width: 1000px;
+                display: flex;
+                margin: 0 auto;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+            
+            a {
+                color: #003cff;
+                text-decoration: none;
+                font-family: "Raleway-Medium";
+            }
+            
+            img {
+                width: 100%;
+                border-radius: 5px;
+            }
+            
+            .row {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                flex-wrap: wrap;
+            }
+            
+            footer {
+                background-color: #131313;
+                color: #f2f4f8;
+                padding: 10px;
+                min-height: 25vh;
+            }
+            
+            .footer {
+                width: 100%;
+                max-width: 1000px;
+                display: flex;
+                margin: 0 auto;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                font-size: 14px;
+            }
+            
+            .content {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+            }
+            
+            #vk_groups {
+                margin: 0 auto;
+            }
+            
+            @media (max-width: 600px) {
+                .content {
+                    flex-direction: column;
+                }
+            }
