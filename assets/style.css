@@ -154,3 +154,9 @@ header {
     justify-content: space-between;
     align-items: center;
 }
+
+a {
+    color: #003cff;
+    text-decoration: none;
+    font-family: "Raleway-Medium";
+}
