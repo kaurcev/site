@@ -127,6 +127,7 @@
         margin: 0 auto;
         margin-top: 60px;
         padding: 10px;
+        min-height: 70vh;
     }
     
     .mini {
@@ -180,6 +181,7 @@
         background-color: #131313;
         color: #f2f4f8;
         padding: 10px;
+        min-height: 25vh;
     }
     
     .footer {
@@ -190,4 +192,5 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
+        font-size: 14px;
     }
