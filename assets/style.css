@@ -5,56 +5,56 @@
 
 @font-face {
     font-family: "Raleway-Medium";
-    src: url("/font/Raleway-Medium.ttf") format("truetype");
+    src: url("/fonts/Raleway-Medium.ttf") format("truetype");
     font-style: normal;
     font-weight: normal;
 }
 
 @font-face {
     font-family: "Raleway-Light";
-    src: url("/font/Raleway-Light.ttf") format("truetype");
+    src: url("/fonts/Raleway-Light.ttf") format("truetype");
     font-style: normal;
     font-weight: normal;
 }
 
 @font-face {
     font-family: "Raleway-Black";
-    src: url("/font/Raleway-Black.ttf") format("truetype");
+    src: url("/fonts/Raleway-Black.ttf") format("truetype");
     font-style: normal;
     font-weight: normal;
 }
 
 @font-face {
     font-family: "Raleway-SemiBold";
-    src: url("/font/Raleway-SemiBold.ttf") format("truetype");
+    src: url("/fonts/Raleway-SemiBold.ttf") format("truetype");
     font-style: normal;
     font-weight: normal;
 }
 
 @font-face {
     font-family: "Raleway-ExtraBold";
-    src: url("/font/Raleway-ExtraBold.ttf") format("truetype");
+    src: url("/fonts/Raleway-ExtraBold.ttf") format("truetype");
     font-style: normal;
     font-weight: normal;
 }
 
 @font-face {
     font-family: "Raleway-Bold";
-    src: url("/font/Raleway-Bold.ttf") format("truetype");
+    src: url("/fonts/Raleway-Bold.ttf") format("truetype");
     font-style: normal;
     font-weight: normal;
 }
 
 @font-face {
     font-family: "Raleway-Regular";
-    src: url("/font/Raleway-Regular.ttf") format("truetype");
+    src: url("/fonts/Raleway-Regular.ttf") format("truetype");
     font-style: normal;
     font-weight: normal;
 }
 
 @font-face {
     font-family: "Raleway-Light";
-    src: url("/font/Raleway-Light.ttf") format("truetype");
+    src: url("/fonts/Raleway-Light.ttf") format("truetype");
     font-style: normal;
     font-weight: normal;
 }
@@ -76,4 +76,81 @@ body {
     flex-direction: row;
     justify-content: space-between;
     margin: 0 auto;
+}
+
+form {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+    min-height: 200px;
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 0 auto;
+}
+
+input {
+    background-color: #f2f4f850;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 16px;
+    font-family: "Raleway-Regular";
+    border: #dddddd solid 2px;
+    outline: none;
+    margin-bottom: 5px;
+}
+
+textarea {
+    background-color: #f2f4f850;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 16px;
+    font-family: "Raleway-Regular";
+    border: #dddddd solid 2px;
+    outline: none;
+    margin-bottom: 5px;
+}
+
+button {
+    background-color: #003cff;
+    color: #fff;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 16px;
+    font-family: "Raleway-Medium";
+    border: #003cff solid 2px;
+}
+
+main {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    margin-top: 60px;
+}
+
+.mini {
+    font-size: 12px;
+    opacity: 0.7;
+    font-family: "Raleway-Light";
+}
+
+header {
+    background-color: #fff;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    padding: 10px;
+}
+
+.header {
+    width: 100%;
+    max-width: 1000px;
+    display: flex;
+    margin: 0 auto;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
