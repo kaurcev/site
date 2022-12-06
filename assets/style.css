@@ -75,6 +75,7 @@
                 border-radius: 10px;
                 margin-bottom: 10px;
                 min-height: 200px;
+                height: fit-content;
             }
             
             form {
@@ -128,7 +129,7 @@
                 margin: 0 auto;
                 margin-top: 60px;
                 padding: 10px;
-                min-height: 70vh;
+                min-height: 78vh;
             }
             
             .mini {
@@ -191,7 +192,7 @@
                 background-color: #131313;
                 color: #f2f4f8;
                 padding: 10px;
-                min-height: 25vh;
+                min-height: 15vh;
             }
             
             .footer {
