@@ -1,6 +1,5 @@
 * {
     box-sizing: border-box;
-    border-radius: none;
 }
 
 @font-face {
@@ -74,7 +73,7 @@ body {
     padding: 10px;
     width: 100%;
     border-radius: 10px;
-    margin: 10px;
+    margin-bottom: 10px;
 }
 
 form {
