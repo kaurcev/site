@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/style.css">
     <title>Скоро всё будет</title>
+    <script src="https://vk.com/js/api/openapi.js?169" type="text/javascript"></script>
 </head>
 
 <body>
@@ -21,7 +22,15 @@
         </div>
     </header>
     <main>
-        <center>Скоро всё будет</center>
+        <script type="text/javascript" src="https://vk.com/js/api/openapi.js?168"></script>
+        <div id="vk_community_messages"></div>
+        <script type="text/javascript">
+            VK.Widgets.CommunityMessages("vk_community_messages", 202486679, {
+                tooltipButtonText: "Есть вопрос?",
+                widgetPosition: "left",
+                expanded: 1
+            });
+        </script>
     </main>
     <footer>
         <div class="footer">kaurcev.tk</div>
