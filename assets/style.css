@@ -217,6 +217,14 @@
                 margin: 0 auto;
             }
             
+            nav {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                width: 100%;
+                max-width: 400px;
+            }
+            
             @media (max-width: 800px) {
                 .content {
                     flex-direction: column;
