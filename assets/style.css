@@ -132,6 +132,15 @@
                 min-height: 78vh;
             }
             
+            pre {
+                padding: 10px;
+                background-color: #212121;
+                color: #ffffff;
+                overflow-x: scroll;
+                border-radius: 10px;
+                font-size: 15px;
+            }
+            
             .mini {
                 font-size: 12px;
                 opacity: 1;

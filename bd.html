@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="yandex-verification" content="a3e13ee3f813eb0c" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/style.css">
+    <title>Скоро всё будет</title>
+    <script src="https://vk.com/js/api/openapi.js?169" type="text/javascript"></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="robots" content="index,follow" />
+    <meta name="revisit-after" content="4 days" />
+
+    <meta name="owner" content="skaurcev2004@yandex.ru" />
+    <meta name="author" lang="ru" content="Александр Каурцев" />
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Александр Каурцев - Личный сайт">
+    <meta property="og:description" content="Александр Каурцев - Веб разработчик и веб дизайнер.">
+    <meta property="og:url" content="http://kaurcev.tk">
+    <meta property="og:image" content="http://mini.s-shot.ru/1280x768/1000/png/?http://kaurcev.tk">
+    <meta property="og:site_name" content="Александр Каурцев">
+    <meta property="og:locale" content="ru_RU">
+
+    <meta property="twitter:card" content="summary_large_image">
+
+    <meta property="twitter:site" content="@kaurcev">
+    <meta property="twitter:creator" content="@kaurcev">
+    <meta property="twitter:image:src" content="http://mini.s-shot.ru/1280x768/1000/png/?http:/kaurcev.tk">
+    <meta name="apple-mobile-web-app-capacity" content="yes">
+    <script>
+        window.yaContextCb = window.yaContextCb || []
+    </script>
+    <script src="https://yandex.ru/ads/system/context.js" async></script>
+    <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "Organization",
+            "name": "Александр Каурцев",
+            "url": "http://kaurcev.tk",
+            "sameAs": [
+                "http://vk.com/kaurcev",
+                "https://twitter.com/kaurcev",
+                "https://tiktok.com/@kaurcev",
+                "https://boosty.to/kaurcev",
+                "https://t.me/kaurcev_dev",
+                "https://patreon.com/kaurcev",
+                "https://www.youtube.com/@kaurcev"
+            ]
+        }
+    </script>
+</head>
+
+<body>
+    <header>
+        <div class="header">
+            <a href="/">
+                <img src="/assets/svg/logo.svg">
+            </a>
+            <nav>
+                <a href="/UI">UI kit</a>
+                <a href="https://pr-cy.ru" target="_blank"><img src="https://s.pr-cy.ru/counters/beta.kaurcev.tk" width="88" height="31" alt="Анализ сайта" /></a>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="content">
+            <div class="panel">
+                <h3>Аудит</h3>
+                <pre>
+CREATE TABLE [audit](
+    [id] [bigint] IDENTITY(1,1) NOT NULL,
+    [table_name] [varchar](50) NOT NULL,
+    [oper] [varchar](15) NOT NULL,
+    [record_old] [varchar](500) NULL,
+    [record_new] [varchar](500) NULL,
+    [username] [varchar](50) NOT NULL,
+    [dt_in] [datetime] NULL,
+CONSTRAINT [PK_audit] PRIMARY KEY CLUSTERED 
+(
+    [id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, 
+IGNORE_DUP_KEY = OFF, 
+ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) 
+ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+                </pre>
+                <h3>Индексы</h3>
+                <pre>
+create nonclustered index _monitors
+on _monitors(_name,_model,_prim)
+</pre>
+                <h3>Представления</h3>
+                <pre>
+create view maximum_ram
+(ОЗУ_В_МБ)
+as 
+select MAX(_RAM)
+FROM _sys_blocks
+go
+select*
+from maximum_ram
+go
+</pre>
+                <h3>Связка таблиц</h3>
+                <pre>
+create view _check_pc
+(Фирма_монитора, Модель_монитора, Процессор, ОЗУ, Материнская_плата)
+as 
+select _monitors._name, _monitors._model, _sys_blocks._proc, _sys_blocks._RAM, _sys_blocks._mother_plata
+from (_PC inner join _monitors on _PC._monitor = _monitors._id) inner join _sys_blocks on _PC._sys_block = _sys_blocks._id
+go
+select*
+from _check_pc
+go
+                </pre>
+                <h3>Триггеры</h3>
+                <pre>
+-- Запрет удаления таблиц
+CREATE TRIGGER блок_таблиц
+ON DATABASE
+FOR DROP_TABLE
+AS
+BEGIN
+	PRINT 'Удалять таблицы запрещено'
+	ROLLBACK TRANSACTION
+END
+GO
+-- Запрет обновления 
+create trigger блок_изменения_модели_принтера
+ON _prints
+FOR UPDATE
+AS
+BEGIN 
+IF UPDATE(_model)
+begin 
+print 'Менять модель принтера запрещено'
+ROLLBACK TRANSACTION
+END
+END
+GO
+
+-- Запрет создания таблиц
+CREATE TRIGGER блок_создания
+ON DATABASE
+FOR CREATE_TABLE
+AS
+BEGIN
+	PRINT 'Создавать таблицы запрещено'
+	ROLLBACK TRANSACTION
+END
+GO
+
+
+-- Запрет обновления таблиц
+CREATE TRIGGER блок_обновления
+ON DATABASE
+FOR ALTER_TABLE
+AS
+BEGIN
+	PRINT 'Обновлять строение таблицы запрещено'
+	ROLLBACK TRANSACTION
+END
+GO
+
+
+-- Запрет удаления триггера
+CREATE TRIGGER блокировка_удаления_триггера
+ON DATABASE FOR DROP_TRIGGER
+AS PRINT 'Перед тем, как удалить триггер, вы должны отключить "блокировка_удаления_триггера"'
+ROLLBACK
+                </pre>
+                <h3>Процедуры</h3>
+                <pre>
+-- Запись пк
+create procedure Запись_системного_блока
+@Процессор varchar(100), @ОЗУ varchar(100), @Материнская_плата varchar(100)
+as
+begin
+insert into _sys_blocks(_proc,_RAM,_mother_plata)
+values(@Процессор, @ОЗУ, @Материнская_плата)
+print 'Системный блок добавлен  :)'
+end
+go
+
+execute  Запись_системного_блока 'AMD 4.4', '6000', 'GIGABYTE B450M'
+go
+
+
+-- Добавить сотрудника
+create procedure Новый_сотрудник
+@Имя varchar(60),@Фамилия varchar(60), @Отчество varchar(60), @Дата_рождения date, @Телефон varchar(11), @email  varchar(60), @График_работы int, @Должность int
+as
+if exists(select* from _sotrudniki where _name=@Имя and _surname = @Фамилия and _date_r = @Дата_рождения)
+begin 
+print 'Такой сотрудник уже имеется'
+end
+else
+begin
+insert into _sotrudniki(_name,_surname,_otchestvo,_date_r,_phone,_email,_time_jop, _role)
+values(@Имя,@Фамилия, @Отчество, @Дата_рождения, @Телефон, @email, @График_работы, @Должность)
+print 'Сотрудник добавлен'
+end
+go
+
+execute  Новый_сотрудник 'Наум','Филиппов','Феодосивич','7-03-1999','78086571519','Naum48@gmail.com','1','1'
+go
+
+--Новая должность сотруднику
+create procedure Новая_должность
+@Имя varchar(60),@Фамилия varchar(60), @Должность int
+as
+if exists(select* from _sotrudniki where _role= @Должность and _name=@Имя and _surname = @Фамилия )
+begin 
+print 'Сотрудник уже на этой должности'
+end
+else
+begin
+UPDATE _sotrudniki
+set _role = @Должность
+WHERE _name = @Имя and _surname = @Фамилия
+print 'Должность изменена'
+end
+go
+
+
+execute  Новая_должность 'Наум','Филиппов','3'
+go
+
+-- Удаление сотрудника
+create procedure Удалить_сотрудника
+@Имя varchar(60), @Фамилия varchar(60)
+as
+if exists(select* from _sotrudniki where _name =@Имя and _surname = @Фамилия )
+begin 
+DELETE FROM _sotrudniki
+WHERE _name = @Имя and _surname = @Фамилия
+print 'Сотрудник удалён'
+end
+else
+begin
+print 'Сотрудник не найден'
+end
+go
+
+
+execute  Удалить_сотрудника 'Наум','Филиппов'
+go
+
+--Обновление примечания переферии
+create procedure Примечание_периферии
+@id int, @prim varchar(250)
+as
+begin
+UPDATE _perefs
+set _prim = @prim
+WHERE _id = @id
+print 'Должность изменена'
+end
+go
+
+execute  Примечание_периферии '1', 'тест'
+go
+
+--Обновление примечания кабинета по его номеру
+create procedure Примечание_кабинета
+@num_cab varchar(10), @prim varchar(250)
+as
+begin
+UPDATE _cabinets
+set _prim = @prim
+WHERE _num_cab = @num_cab
+print 'Должность изменена'
+end
+go
+
+execute  Примечание_кабинета '10', 'тест'
+go
+
+
+--Обновление зарплаты у указываемой должности
+create procedure Новая_зарплата
+@Name varchar(60), @money money
+as
+begin
+UPDATE _roles
+set _jop_money = @money
+WHERE _name = @Name
+print 'Зарплата изменена'
+end
+go
+
+execute  Новая_зарплата 'Лаборант', '1000000'
+go
+
+
+-- Удаление должности
+create procedure Удалить_должность
+@Должность varchar(60)
+as
+if exists(select* from _roles where _name =@Должность)
+begin 
+DELETE FROM _roles
+WHERE _name = @Должность
+print 'Должность удалёна'
+end
+else
+begin
+print 'Должность не найдена'
+end
+go
+
+
+execute  Удалить_должность 'Лаборант'
+go
+                </pre>
+            </div>
+
+        </div>
+
+    </main>
+    <footer>
+        <div class="footer">kaurcev.tk</div>
+    </footer>
+    <script type="text/javascript">
+        VK.Widgets.Group("vk_groups", {
+            mode: 4,
+            wide: 1,
+            height: 500,
+            color1: "f2f4f8",
+            color2: "131313",
+            color3: "003cff"
+        }, 202486679);
+    </script>
+    <script>
+        (function(m, e, t, r, i, k, a) {
+            m[i] = m[i] || function() {
+                (m[i].a = m[i].a || []).push(arguments)
+            };
+            m[i].l = 1 * new Date();
+            for (var j = 0; j < document.scripts.length; j++) {
+                if (document.scripts[j].src === r) {
+                    return;
+                }
+            }
+            k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+        })
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+        ym(88768984, "init", {
+            clickmap: true,
+            trackLinks: true,
+            accurateTrackBounce: true,
+            webvisor: true
+        });
+    </script>
+
+    <noscript><div><img src="https://mc.yandex.ru/watch/88768984" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js"; import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-analytics.js"; const firebaseConfig = { apiKey: "AIzaSyAOv3Wdhq3aJUPMlLIF3ok1QpB7mr1WvBU",
+        authDomain: "alexsandr-kaurcev.firebaseapp.com", projectId: "alexsandr-kaurcev", storageBucket: "alexsandr-kaurcev.appspot.com", messagingSenderId: "1095166323080", appId: "1:1095166323080:web:2ead5cf0f691e27658b23d", measurementId: "G-YWQSGKG6LF"
+        }; const app = initializeApp(firebaseConfig); const analytics = getAnalytics(app);
+
+    </script>
+</body>
+
+</html>
