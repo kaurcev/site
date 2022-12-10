@@ -250,3 +250,13 @@
                     flex-direction: column;
                 }
             }
+            
+            #share {
+                background-color: #fff;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                margin-top: 10px;
+                border-radius: 10px;
+            }
