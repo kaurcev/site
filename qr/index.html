@@ -51,6 +51,7 @@
             ]
         }
     </script>
+    <script src="generator.js"></script>
 </head>
 
 <body>
@@ -66,9 +67,49 @@
         </div>
     </header>
     <main>
-        <div class="centered">
-            <h1>Скоро</h1>
+
+        <div class="panel">
+            <div class="content">
+                <div class="panel">
+                    <div style="width: fit-content;" id="qr_code"></div>
+                    <div id="qr_cona"></div>
+                </div>
+                <div>
+                    <input id="text" maxlength="100" value="Первоначальный текст">
+                    <button onclick="generate();">Создать</button>
+                    <button onclick="saved()" id="save">Скачать</button>
+                </div>
+
+            </div>
+
         </div>
+
+        <script>
+            function generate() {
+                if (document.getElementById('qr_code') != undefined) {
+                    const el = (selector) => document.querySelector(selector);
+                    let qrcode = el('#qr_code');
+                    let text = document.getElementById("text").value;
+                    qrcode.innerHTML = "";
+                    qrcode.append(QRCode.generateHTML(text, {}))
+                }
+            };
+            $(function() {
+                $("#save").click(function() {
+                    html2canvas($("#qr_code"), {
+                        onrendered: function(canvas) {
+                            theCanvas = canvas;
+                            $("#qr_cona").append(canvas);
+                            var anchor = document.createElement("a");
+                            anchor.href = canvas.toDataURL("image/png");
+                            anchor.download = "QR.PNG";
+                            anchor.click();
+                            $("#qr_cona").remove();
+                        }
+                    });
+                });
+            });
+        </script>
     </main>
     <script>
         (function(m, e, t, r, i, k, a) {

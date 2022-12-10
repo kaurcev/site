@@ -111,6 +111,16 @@
                 border: #dddddd solid 2px;
                 outline: none;
                 margin-bottom: 5px;
+                width: 100%;
+                max-width: 500px;
+                min-height: 200px;
+                height: fit-content;
+            }
+            
+            .qr_code {
+                width: 100%;
+                overflow: auto;
+                zoom: 100%;
             }
             
             button {
