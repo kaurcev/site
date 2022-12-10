@@ -27,7 +27,9 @@
             <div id="qr_code">
             </div>
             <h1>Сканируйте QR Код</h1>
-            <p id="link" class="mini">Или перейдите по ссылке </p>
+            <p class="mini">Или перейдите по
+                <a href="" id="link" target="_blank">ссылке</a>
+            </p>
         </div>
 
     </main>
@@ -40,7 +42,7 @@
                 qrcode.innerHTML = "";
                 qrcode.append(QRCode.generateHTML(text, {}))
             }
-            document.getElementById('link').innerHTML += window.location.search.substring(1);
+            document.getElementById('link').href = window.location.search.substring(1);
         };
         $(function() {
             $("#save").click(function() {
