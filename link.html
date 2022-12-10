@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Приглашение</title>
+    <link rel="stylesheet" href="/assets/style.css">
+    <script src="/qr/generator.js"></script>
+</head>
+
+<body onload="generate()">
+    <header>
+        <div class="header">
+            <a href="/">
+                <img src="/assets/svg/logo.svg">
+            </a>
+            <nav>
+                <a href="/UI">UI kit</a>
+                <a href="https://pr-cy.ru" target="_blank"><img src="https://s.pr-cy.ru/counters/beta.kaurcev.tk" width="88" height="31" alt="Анализ сайта" /></a>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="panel centered">
+            <div id="qr_code">
+            </div>
+            <h1>Сканируйте QR Код</h1>
+            <p id="link" class="mini">Или перейдите по ссылке </p>
+        </div>
+
+    </main>
+    <script>
+        function generate() {
+            if (document.getElementById('qr_code') != undefined) {
+                const el = (selector) => document.querySelector(selector);
+                let qrcode = el('#qr_code');
+                let text = window.location.search.substring(1);
+                qrcode.innerHTML = "";
+                qrcode.append(QRCode.generateHTML(text, {}))
+            }
+            document.getElementById('link').innerHTML += window.location.search.substring(1);
+        };
+        $(function() {
+            $("#save").click(function() {
+                html2canvas($("#qr_code"), {
+                    onrendered: function(canvas) {
+                        theCanvas = canvas;
+                        $("#qr_cona").append(canvas);
+                        var anchor = document.createElement("a");
+                        anchor.href = canvas.toDataURL("image/png");
+                        anchor.download = "QR.PNG";
+                        anchor.click();
+                        $("#qr_cona").remove();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
