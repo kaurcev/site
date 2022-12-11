@@ -151,6 +151,11 @@
                 font-size: 15px;
             }
             
+            .dop {
+                max-width: 300px;
+                width: 100%;
+            }
+            
             .mini {
                 font-size: 12px;
                 opacity: 1;
@@ -248,6 +253,10 @@
             @media (max-width: 800px) {
                 .content {
                     flex-direction: column;
+                }
+                .dop {
+                    max-width: none;
+                    width: 100%;
                 }
             }
             
