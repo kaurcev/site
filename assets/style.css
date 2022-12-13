@@ -167,6 +167,19 @@
                 margin: 0px;
             }
             
+            .messege a {
+                color: #f2f4f8;
+            }
+            
+            .aco {
+                background-color: #003cff;
+                --size: 100px;
+                padding: 10px;
+                border-radius: 10000px;
+                width: var(--size);
+                height: var(--size);
+            }
+            
             .messege p {
                 background-color: #003cff;
                 max-width: 80%;
