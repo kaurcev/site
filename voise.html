@@ -18,30 +18,32 @@
           <p>Начните пользоваться :)<br><br>Вы можете сделать скриншот сайта с помощью:<br>/screen {Ссылка на любой сайт}<br><br>На данный момент ведется разработка и внедрение приложения на сайт.<br><br>Уже внедрен голосовой ввод, так же поиск по запросу.<br><br>Пример:<br>Что такое {Ваш запрос}<br><br>Свои рекомендации можете предлагать в мой телеграм:<br><a target="_blank" href="https://kaurcev.t.me">Написать мне</a></p>
         
         -->
+    <main>
 
-    <div class="content">
-        <div class="panel">
-            <div id="voise">
-                <div class="panel centered">
-                    <h2 id="texted"></h2>
-                    <p class="mini">Говорите, ассистент обрабатывает ваш голос </p><button class="aco" onclick="stop()">Стой</button></div>
-            </div>
-            <div class="chat">
-                <div class="head">Ассистент <button onclick="clearee()">Отчистить историю</button></div>
-                <div class="box">
-                    <div class="scroll" id="box">
+        <div class="content">
+            <div class="panel">
+                <div id="voise">
+                    <div class="panel centered">
+                        <h2 id="texted"></h2>
+                        <p class="mini">Говорите, ассистент обрабатывает ваш голос </p><button class="aco" onclick="stop()">Стой</button></div>
+                </div>
+                <div class="chat">
+                    <div class="head">Ассистент <button onclick="clearee()">Отчистить историю</button></div>
+                    <div class="box">
+                        <div class="scroll" id="box">
 
+                        </div>
+                    </div>
+                    <div class="inp">
+                        <input style="width:100%" id="text"><span>&nbsp;</span><button onclick="send()">Отправить</button><span>&nbsp;</span><button onclick="speech()">:D</button>
                     </div>
                 </div>
-                <div class="inp">
-                    <input style="width:100%" id="text"><span>&nbsp;</span><button onclick="send()">Отправить</button><span>&nbsp;</span><button onclick="speech()">:D</button>
-                </div>
+            </div>
+            <div class="dop">
+                <div id="share"></div>
             </div>
         </div>
-        <div class="dop">
-            <div id="share"></div>
-        </div>
-    </div>
+    </main>
     <script src="/assets/wid/share.js"></script>
     <script src="/qr/generator.js"></script>
 
