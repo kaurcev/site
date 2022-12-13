@@ -54,18 +54,16 @@
             }
 
             function send() {
-                localStorage.setItem('save', document.getElementById("box").innerHTML);
+
                 var check = Array.from(document.getElementById('text').value)[0];
                 if (check == "/") {
-
-
                     document.getElementById('box').innerHTML += '<div class="messege for"> <p><img src="https://mini.s-shot.ru/1024x768/1000/png/?' + document.getElementById('text').value.slice(8) + '" alt="#"></p></div>';
                     document.getElementById('text').value = '';
                 } else {
                     document.getElementById('box').innerHTML += '<div class="messege me"> <p>' + document.getElementById('text').value + '</p></div>';
                     document.getElementById('text').value = '';
                 }
-
+                localStorage.setItem('save', document.getElementById("box").innerHTML);
             }
 
             function loadd() {
