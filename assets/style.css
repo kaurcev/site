@@ -128,7 +128,7 @@
                 flex-direction: column;
                 max-width: 500px;
                 margin: 0 auto;
-                height: 95vh;
+                height: 90vh;
                 justify-content: space-between;
                 padding-bottom: 30px;
             }
@@ -138,6 +138,7 @@
                 flex-direction: column;
                 justify-content: end;
                 height: 80vh;
+                padding: 1%;
                 overflow-y: scroll;
             }
             
