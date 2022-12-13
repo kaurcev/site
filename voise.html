@@ -69,11 +69,10 @@
                         document.getElementById('box').innerHTML += '<div class="messege me"> <p>' + document.getElementById('text').value + '</p></div>';
                         document.getElementById('box').innerHTML += '<div class="messege for"> <p><a href="https://yandex.ru/search/?text=' + a[2] + '&lang=ru">Всё, что найдено по запросу "' + a[2] + '"</a></p></div>';
                         document.getElementById('text').value = '';
-                    } else if (a[0].toLowerCase() == "Скажи") {
+                    } else if (a[0].toLowerCase() == "скажи") {
                         document.getElementById('box').innerHTML += '<div class="messege me"> <p>' + document.getElementById('text').value + '</p></div>';
                         var synth = window.speechSynthesis;
-                        var sd = document.getElementById('text').value.slice(6)
-                        var utterance = new SpeechSynthesisUtterance(sd);
+                        var utterance = new SpeechSynthesisUtterance(document.getElementById('text').value.slice(6));
                         synth.speak(utterance);
                         document.getElementById('text').value = '';
                     } else {
