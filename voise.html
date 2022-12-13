@@ -107,11 +107,12 @@
                         document.getElementById('text').value = '';
                     } else {
                         document.getElementById('box').innerHTML += '<div class="messege me"> <p>' + document.getElementById('text').value + '</p></div>';
+                        document.getElementById('box').innerHTML += '<div class="messege for"> <p>Я пока что не могу дать вам ответ на это(</p></div>';
                         document.getElementById('text').value = '';
                     }
                 }
             } else {
-                document.getElementById('box').innerHTML += '<div class="messege for"> <p>Я пока что не могу дать вам ответ на это(</p></div>';
+                document.getElementById('box').innerHTML += '<div class="messege for"> <p>Вы нажали на кнопку, не введя текст</p></div>';
             }
             localStorage.setItem('save', document.getElementById("box").innerHTML);
         }
