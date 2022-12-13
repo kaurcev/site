@@ -12,6 +12,7 @@
     <button onclick="speech ()">Слушать</button>
     <button onclick="talk ()">Проговорить</button>
     <button onclick="stop ()">Остановить</button>
+    <p id="text"></p>
 
     <script>
         // Создаем распознаватель
@@ -27,9 +28,10 @@
         recognizer.onresult = function(event) {
             var result = event.results[event.resultIndex];
             if (result.isFinal) {
-                alert(result[0].transcript);
+                document.getElementById('text').innerHTML = result[0].transcript;
+                window.open('https://yandex.ru/search/?text=' + result[0].transcript + "&lang=ru")
             } else {
-                console.log('Промежуточный результат: ', result[0].transcript);
+                document.getElementById('text').innerHTML = result[0].transcript;
             }
         };
 
@@ -38,10 +40,11 @@
             recognizer.start();
         }
 
-        var synth = window.speechSynthesis;
-        var utterance = new SpeechSynthesisUtterance('How about we say this now? This is quite a long sentence to say.');
+
 
         function talk() {
+            var synth = window.speechSynthesis;
+            var utterance = new SpeechSynthesisUtterance(document.getElementById('text').innerHTML);
             synth.speak(utterance);
         }
 
