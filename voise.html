@@ -110,7 +110,9 @@
                         document.getElementById('text').value = '';
                     }
                 }
-            } else {}
+            } else {
+                document.getElementById('box').innerHTML += '<div class="messege for"> <p>Я пока что не могу дать вам ответ на это(</p></div>';
+            }
             localStorage.setItem('save', document.getElementById("box").innerHTML);
         }
 
