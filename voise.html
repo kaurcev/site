@@ -71,7 +71,6 @@
                         document.getElementById('text').value = '';
                     } else if (a[0].toLowerCase() == "Скажи") {
                         document.getElementById('box').innerHTML += '<div class="messege me"> <p>' + document.getElementById('text').value + '</p></div>';
-
                         var synth = window.speechSynthesis;
                         var utterance = new SpeechSynthesisUtterance(document.getElementById('text').value.slice(8));
                         synth.speak(utterance);
