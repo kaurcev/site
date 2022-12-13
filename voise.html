@@ -15,11 +15,11 @@
             <p>Говорите, асистент обрабатывает ваш голос </p><button class="aco" onclick="stop()">Стой</button></div>
     </div>
     <div class="chat">
-        <div class="head">Ассистент</div>
+        <div class="head">Ассистент <button onclick="clearee()">Отчистить историю</button></div>
         <div class="box">
             <div class="scroll" id="box">
                 <div class="messege for">
-                    <p>Чтобы начать вводить, нажмите на "<b>Прослушать</b>" и начните говорить :)</p>
+                    <p>Начните пользоваться :)</p>
                 </div>
             </div>
         </div>
@@ -105,6 +105,12 @@
             function deleteA() {
                 document.getElementById('voise').style.display = 'none';
                 document.getElementById('texted').innerHTML = '';
+            }
+
+            function clearee() {
+                localStorage.removeItem('save');
+                document.getElementById("box").innerHTML = '<div class="messege for"><p>Начните пользоваться :)</p></div>';
+                localStorage.setItem('save', document.getElementById("box").innerHTML);
             }
         </script>
 

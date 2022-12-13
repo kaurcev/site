@@ -150,8 +150,11 @@
             .chat .head {
                 background-color: #fff;
                 padding: 10px;
-                text-align: center;
                 font-family: "Raleway-SemiBold";
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
             }
             
             .inp {
