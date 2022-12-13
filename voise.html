@@ -72,7 +72,8 @@
                     } else if (a[0].toLowerCase() == "Скажи") {
                         document.getElementById('box').innerHTML += '<div class="messege me"> <p>' + document.getElementById('text').value + '</p></div>';
                         var synth = window.speechSynthesis;
-                        var utterance = new SpeechSynthesisUtterance(document.getElementById('text').value.slice(8));
+                        var sd = document.getElementById('text').value.slice(8)
+                        var utterance = new SpeechSynthesisUtterance(sd);
                         synth.speak(utterance);
                         document.getElementById('text').value = '';
                     } else {
