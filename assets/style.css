@@ -128,7 +128,7 @@
                 flex-direction: column;
                 max-width: 500px;
                 margin: 0 auto;
-                height: 100vh;
+                height: 95vh;
                 justify-content: space-between;
                 padding-bottom: 30px;
             }
@@ -138,6 +138,7 @@
                 flex-direction: column;
                 justify-content: end;
                 height: 80vh;
+                overflow-y: scroll;
             }
             
             .chat .head {
