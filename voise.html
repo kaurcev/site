@@ -6,27 +6,6 @@
     <title>Распознавание голоса и чтение текста</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/style.css">
-    <style>
-        #voise {
-            display: none;
-            background-color: #21212190;
-            position: fixed;
-            top: 0px;
-            left: 0px;
-            width: 100%;
-            height: 100vh;
-            backdrop-filter: blur(5px);
-            flex-direction: column;
-            justify-content: end;
-            padding: 2%;
-            text-align: center;
-        }
-        
-        #voise .panel {
-            box-shadow: 0 0 10px 0#fff;
-            height: 300px;
-        }
-    </style>
 </head>
 
 <body id="body" onload="loadd()">
@@ -114,8 +93,9 @@
             }
 
             function stop() {
-                synth.pause();
                 deleteA();
+                synth.pause();
+
             }
 
             function createA() {
