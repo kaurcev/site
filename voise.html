@@ -11,15 +11,15 @@
 <body>
     <div class="chat">
         <div class="head">Ассистент</div>
-        <div class="box" id="box">
-            <div class="scroll">
+        <div class="box">
+            <div class="scroll" id="box">
                 <div class="messege for">
                     <p>Чтобы начать вводить, нажмите на "<b>Прослушать</b>" и начните говорить :)</p>
                 </div>
             </div>
         </div>
         <div class="inp">
-            <input style="width:100%" id="text"> <button onclick="speech()">Прослушать</button>
+            <input style="width:100%" id="text"><span>&nbsp;</span><button onclick="send()">Отправить</button><span>&nbsp;</span><button onclick="speech()">:D</button>
         </div>
         <!--button onclick="speech()">Слушать</button>
         <button onclick="talk()">Проговорить</button>
@@ -51,6 +51,11 @@
             function speech() {
                 // Начинаем слушать микрофон и распознавать голос
                 recognizer.start();
+            }
+
+            function send() {
+                document.getElementById('box').innerHTML += '<div class="messege me"> <p>' + document.getElementById('text').value + '</p></div>';
+                document.getElementById('text').value = '';
             }
 
 
