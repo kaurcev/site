@@ -9,22 +9,8 @@
 </head>
 
 <body id="body" onload="loadd()">
-    <div id="voise">
-        <div class="panel centered">
-            <h2 id="texted"></h2>
-            <p class="mini">Говорите, ассистент обрабатывает ваш голос </p><button class="aco" onclick="stop()">Стой</button></div>
-    </div>
-    <div class="chat">
-        <div class="head">Ассистент <button onclick="clearee()">Отчистить историю</button></div>
-        <div class="box">
-            <div class="scroll" id="box">
 
-            </div>
-        </div>
-        <div class="inp">
-            <input style="width:100%" id="text"><span>&nbsp;</span><button onclick="send()">Отправить</button><span>&nbsp;</span><button onclick="speech()">:D</button>
-        </div>
-        <!--button onclick="speech()">Слушать</button>
+    <!--button onclick="speech()">Слушать</button>
         <button onclick="talk()">Проговорить</button>
         <button onclick="stop()">Остановить</button
         
@@ -33,98 +19,131 @@
         
         -->
 
+    <div class="content">
+        <div class="panel">
+            <div id="voise">
+                <div class="panel centered">
+                    <h2 id="texted"></h2>
+                    <p class="mini">Говорите, ассистент обрабатывает ваш голос </p><button class="aco" onclick="stop()">Стой</button></div>
+            </div>
+            <div class="chat">
+                <div class="head">Ассистент <button onclick="clearee()">Отчистить историю</button></div>
+                <div class="box">
+                    <div class="scroll" id="box">
 
-        <script>
-            // Создаем распознаватель
-            var recognizer = new webkitSpeechRecognition();
+                    </div>
+                </div>
+                <div class="inp">
+                    <input style="width:100%" id="text"><span>&nbsp;</span><button onclick="send()">Отправить</button><span>&nbsp;</span><button onclick="speech()">:D</button>
+                </div>
+            </div>
+        </div>
+        <div class="dop">
+            <div id="share"></div>
+        </div>
+    </div>
+    <script src="/assets/wid/share.js"></script>
+    <script src="/qr/generator.js"></script>
 
-            // Ставим опцию, чтобы распознавание началось ещё до того, как пользователь закончит говорить
-            recognizer.interimResults = true;
+    <script>
+        // Создаем распознаватель
+        var recognizer = new webkitSpeechRecognition();
 
-            // Какой язык будем распознавать?
-            recognizer.lang = 'ru-Ru';
+        // Ставим опцию, чтобы распознавание началось ещё до того, как пользователь закончит говорить
+        recognizer.interimResults = true;
 
-            // Используем колбек для обработки результатов
-            recognizer.onresult = function(event) {
-                var result = event.results[event.resultIndex];
-                if (result.isFinal) {
-                    deleteA();
-                    send();
-                } else {
-                    document.getElementById('text').value = result[0].transcript;
-                    document.getElementById('texted').innerHTML = result[0].transcript;
-                }
-            };
+        // Какой язык будем распознавать?
+        recognizer.lang = 'ru-Ru';
 
-            function speech() {
-                // Начинаем слушать микрофон и распознавать голос
-                createA();
-                recognizer.start();
+        // Используем колбек для обработки результатов
+        recognizer.onresult = function(event) {
+            var result = event.results[event.resultIndex];
+            if (result.isFinal) {
+                deleteA();
+                send();
+            } else {
+                document.getElementById('text').value = result[0].transcript;
+                document.getElementById('texted').innerHTML = result[0].transcript;
             }
+        };
 
-            function send() {
-                if (document.getElementById('text').value != "") {
-                    a = document.getElementById('text').value.split(' ').slice(0, 100);
-                    if (a[0].toLowerCase() == "что" && a[1].toLowerCase() == "такое") {
-                        document.getElementById('box').innerHTML += '<div class="messege me"> <p>' + document.getElementById('text').value + '</p></div>';
-                        document.getElementById('box').innerHTML += '<div class="messege for"> <p><a href="https://yandex.ru/search/?text=' + a[2] + '&lang=ru">Всё, что найдено по запросу "' + a[2] + '"</a></p></div>';
-                        document.getElementById('text').value = '';
-                    } else if (a[0].toLowerCase() == "скажи") {
-                        document.getElementById('box').innerHTML += '<div class="messege me"> <p>' + document.getElementById('text').value + '</p></div>';
-                        var synth = window.speechSynthesis;
-                        var utterance = new SpeechSynthesisUtterance(document.getElementById('text').value.slice(6));
-                        synth.speak(utterance);
+        function speech() {
+            // Начинаем слушать микрофон и распознавать голос
+            createA();
+            recognizer.start();
+        }
+
+        function send() {
+            if (document.getElementById('text').value != "") {
+                a = document.getElementById('text').value.split(' ').slice(0, 100);
+                if (a[0].toLowerCase() == "что" && a[1].toLowerCase() == "такое") {
+                    document.getElementById('box').innerHTML += '<div class="messege me"> <p>' + document.getElementById('text').value + '</p></div>';
+                    document.getElementById('box').innerHTML += '<div class="messege for"> <p><a href="https://yandex.ru/search/?text=' + a[2] + '&lang=ru">Всё, что найдено по запросу "' + a[2] + '"</a></p></div>';
+                    document.getElementById('text').value = '';
+                } else if (a[0].toLowerCase() == "скажи") {
+                    document.getElementById('box').innerHTML += '<div class="messege me"> <p>' + document.getElementById('text').value + '</p></div>';
+                    var synth = window.speechSynthesis;
+                    var utterance = new SpeechSynthesisUtterance(document.getElementById('text').value.slice(6));
+                    synth.speak(utterance);
+                    document.getElementById('text').value = '';
+                } else {
+                    var check = Array.from(document.getElementById('text').value)[0];
+                    if (check == "/") {
+                        document.getElementById('box').innerHTML += '<div class="messege for"> <p><img src="https://mini.s-shot.ru/1024x768/1000/png/?' + document.getElementById('text').value.slice(8) + '" alt="#"></p></div>';
                         document.getElementById('text').value = '';
                     } else {
-                        var check = Array.from(document.getElementById('text').value)[0];
-                        if (check == "/") {
-                            document.getElementById('box').innerHTML += '<div class="messege for"> <p><img src="https://mini.s-shot.ru/1024x768/1000/png/?' + document.getElementById('text').value.slice(8) + '" alt="#"></p></div>';
-                            document.getElementById('text').value = '';
-                        } else {
-                            document.getElementById('box').innerHTML += '<div class="messege me"> <p>' + document.getElementById('text').value + '</p></div>';
-                            document.getElementById('text').value = '';
-                        }
+                        document.getElementById('box').innerHTML += '<div class="messege me"> <p>' + document.getElementById('text').value + '</p></div>';
+                        document.getElementById('text').value = '';
                     }
-                } else {}
-                localStorage.setItem('save', document.getElementById("box").innerHTML);
+                }
+            } else {}
+            localStorage.setItem('save', document.getElementById("box").innerHTML);
+        }
+
+        function loadd() {
+            document.getElementById('box').innerHTML = localStorage.getItem('save');
+            document.getElementById("share").innerHTML = '<div id="qr_code"></div> <p>Поделитесь страницей :)</p>';
+            if (document.getElementById('qr_code') != undefined) {
+                const el = (selector) => document.querySelector(selector);
+                let qrcode = el('#qr_code');
+                let text = window.location.href;
+                qrcode.innerHTML = "";
+                qrcode.append(QRCode.generateHTML(text, {}))
             }
-
-            function loadd() {
-                document.getElementById('box').innerHTML = localStorage.getItem('save')
-            }
+        }
 
 
 
-            function talk() {
-                var synth = window.speechSynthesis;
-                var utterance = new SpeechSynthesisUtterance(document.getElementById('text').innerHTML);
-                synth.speak(utterance);
-            }
+        function talk() {
+            var synth = window.speechSynthesis;
+            var utterance = new SpeechSynthesisUtterance(document.getElementById('text').innerHTML);
+            synth.speak(utterance);
+        }
 
-            function stop() {
-                deleteA();
-                synth.pause();
+        function stop() {
+            deleteA();
+            synth.pause();
 
-            }
+        }
 
-            function createA() {
-                document.getElementById('voise').style.display = 'flex';
-            }
+        function createA() {
+            document.getElementById('voise').style.display = 'flex';
+        }
 
-            function deleteA() {
-                document.getElementById('voise').style.display = 'none';
-                document.getElementById('texted').innerHTML = '';
-            }
+        function deleteA() {
+            document.getElementById('voise').style.display = 'none';
+            document.getElementById('texted').innerHTML = '';
+        }
 
-            function clearee() {
-                localStorage.removeItem('save');
-                document.getElementById("box").innerHTML = '<div class="messege for"><p>Начните пользоваться :)<br><br>Вы можете сделать скриншот сайта с помощью:<br>/screen {Ссылка на любой сайт}<br><br>На данный момент ведется разработка и внедрение приложения на сайт.<br><br>Уже внедрен голосовой ввод, так же поиск по запросу.<br><br>Пример:<br>Что такое {Ваш запрос}<br><br>Свои рекомендации можете предлагать в мой телеграм:<br><a target="_blank" href="https://kaurcev.t.me">Написать мне</a></p></div>';
-                localStorage.setItem('save', document.getElementById("box").innerHTML);
-            }
-            const assist = {
-                varsion: '0.0.1',
-            };
-        </script>
+        function clearee() {
+            localStorage.removeItem('save');
+            document.getElementById("box").innerHTML = '<div class="messege for"><p>Начните пользоваться :)<br><br>Вы можете сделать скриншот сайта с помощью:<br>/screen {Ссылка на любой сайт}<br><br>На данный момент ведется разработка и внедрение приложения на сайт.<br><br>Уже внедрен голосовой ввод, так же поиск по запросу.<br><br>Пример:<br>Что такое {Ваш запрос}<br><br>Свои рекомендации можете предлагать в мой телеграм:<br><a target="_blank" href="https://kaurcev.t.me">Написать мне</a></p></div>';
+            localStorage.setItem('save', document.getElementById("box").innerHTML);
+        }
+        const assist = {
+            varsion: '0.0.1',
+        };
+    </script>
 
 </body>
 
