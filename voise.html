@@ -76,7 +76,7 @@
 
             function speech() {
                 // Начинаем слушать микрофон и распознавать голос
-                create();
+                createA();
                 recognizer.start();
             }
 
@@ -115,9 +115,10 @@
 
             function stop() {
                 synth.pause();
+                deleteA();
             }
 
-            function create() {
+            function createA() {
                 document.getElementById('voise').style.display = 'flex';
             }
 
