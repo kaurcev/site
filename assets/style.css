@@ -138,8 +138,9 @@
                 flex-direction: column;
                 justify-content: end;
                 height: 80vh;
-                padding: 1%;
+                width: 100%;
                 overflow-y: scroll;
+                position: relative;
             }
             
             .chat .head {
