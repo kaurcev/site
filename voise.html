@@ -60,23 +60,23 @@
             }
 
             function send() {
-                a = document.getElementById('text').value.split(' ').slice(0, 100);
-                if (a[0].toLowerCase() == "что" && a[1].toLowerCase() == "такое") {
-                    document.getElementById('box').innerHTML += '<div class="messege me"> <p>' + document.getElementById('text').value + '</p></div>';
-                    document.getElementById('box').innerHTML += '<div class="messege for"> <p><a href="https://yandex.ru/search/?text=' + a[2] + '&lang=ru">Всё, что найдено по запросу "' + a[2] + '"</a></p></div>';
-                    document.getElementById('text').value = '';
-                } else {
-
-
-                    var check = Array.from(document.getElementById('text').value)[0];
-                    if (check == "/") {
-                        document.getElementById('box').innerHTML += '<div class="messege for"> <p><img src="https://mini.s-shot.ru/1024x768/1000/png/?' + document.getElementById('text').value.slice(8) + '" alt="#"></p></div>';
+                if (document.getElementById('text').value != "") {
+                    a = document.getElementById('text').value.split(' ').slice(0, 100);
+                    if (a[0].toLowerCase() == "что" && a[1].toLowerCase() == "такое") {
+                        document.getElementById('box').innerHTML += '<div class="messege me"> <p>' + document.getElementById('text').value + '</p></div>';
+                        document.getElementById('box').innerHTML += '<div class="messege for"> <p><a href="https://yandex.ru/search/?text=' + a[2] + '&lang=ru">Всё, что найдено по запросу "' + a[2] + '"</a></p></div>';
                         document.getElementById('text').value = '';
                     } else {
-                        document.getElementById('box').innerHTML += '<div class="messege me"> <p>' + document.getElementById('text').value + '</p></div>';
-                        document.getElementById('text').value = '';
+                        var check = Array.from(document.getElementById('text').value)[0];
+                        if (check == "/") {
+                            document.getElementById('box').innerHTML += '<div class="messege for"> <p><img src="https://mini.s-shot.ru/1024x768/1000/png/?' + document.getElementById('text').value.slice(8) + '" alt="#"></p></div>';
+                            document.getElementById('text').value = '';
+                        } else {
+                            document.getElementById('box').innerHTML += '<div class="messege me"> <p>' + document.getElementById('text').value + '</p></div>';
+                            document.getElementById('text').value = '';
+                        }
                     }
-                }
+                } else {}
                 localStorage.setItem('save', document.getElementById("box").innerHTML);
             }
 
