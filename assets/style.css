@@ -189,7 +189,8 @@
                 color: #fff;
                 border-radius: 20px;
                 margin: 2px;
-                padding: 15px;
+                padding: 10px;
+                min-width: 40px;
             }
             
             .messege.me {
