@@ -173,7 +173,7 @@
             }
             
             .aco {
-                background-color: #003cff;
+                background: linear-gradient(to bottom right, #003cff, rgb(255, 111, 135));
                 --size: 100px;
                 padding: 10px;
                 border-radius: 10000px;
@@ -182,7 +182,7 @@
             }
             
             .messege p {
-                background-color: #003cff;
+                background: linear-gradient(to bottom right, #003cff, rgb(252, 58, 132));
                 max-width: 80%;
                 width: fit-content;
                 padding: 8px;
