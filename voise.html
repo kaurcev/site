@@ -5,53 +5,128 @@
     <meta charset="utf-8">
     <title>Распознавание голоса и чтение текста</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/style.css">
+    <style>
+        .chat {
+            display: flex;
+            flex-direction: column;
+            max-width: 500px;
+            margin: 0 auto;
+            height: 100vh;
+            justify-content: space-between;
+            padding-bottom: 30px;
+        }
+        
+        .box {
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+            height: 100vh;
+        }
+        
+        .chat .head {
+            background-color: #fff;
+            padding: 10px;
+            text-align: center;
+            font-family: "Raleway-SemiBold";
+        }
+        
+        .inp {
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            align-content: center;
+            margin-top: 10px;
+        }
+        
+        input {
+            margin: 0px;
+        }
+        
+        .messege p {
+            background-color: #003cff;
+            max-width: 80%;
+            width: fit-content;
+            padding: 8px;
+            color: #fff;
+            border-radius: 15px;
+            margin: 2px;
+        }
+        
+        .messege.me {
+            display: flex;
+            justify-content: right;
+        }
+        
+        .messege.me p {
+            border-bottom-right-radius: 1px;
+        }
+        
+        .messege.for p {
+            border-bottom-left-radius: 1px;
+        }
+    </style>
 </head>
 
 <body>
+    <div class="chat">
+        <div class="head">Ассистент</div>
+        <div class="box" id="box">
+            <div class="messege me">
+                <p>Автора рассказов принято именовать новеллистом, а совокупность рассказов— новеллистикой.</p>
+            </div>
+            <div class="messege for">
+                <p>Автора рассказов принято именовать новеллистом, а совокупность рассказов— новеллистикой.</p>
+            </div>
 
-    <button onclick="speech ()">Слушать</button>
-    <button onclick="talk ()">Проговорить</button>
-    <button onclick="stop ()">Остановить</button>
-    <p id="text"></p>
+        </div>
+        <div class="inp">
+            <input style="width:100%" id="text"> <button onclick="speech()">Слушать</button>
+        </div>
+        <!--button onclick="speech()">Слушать</button>
+        <button onclick="talk()">Проговорить</button>
+        <button onclick="stop()">Остановить</button-->
 
-    <script>
-        // Создаем распознаватель
-        var recognizer = new webkitSpeechRecognition();
 
-        // Ставим опцию, чтобы распознавание началось ещё до того, как пользователь закончит говорить
-        recognizer.interimResults = true;
+        <script>
+            // Создаем распознаватель
+            var recognizer = new webkitSpeechRecognition();
 
-        // Какой язык будем распознавать?
-        recognizer.lang = 'ru-Ru';
+            // Ставим опцию, чтобы распознавание началось ещё до того, как пользователь закончит говорить
+            recognizer.interimResults = true;
 
-        // Используем колбек для обработки результатов
-        recognizer.onresult = function(event) {
-            var result = event.results[event.resultIndex];
-            if (result.isFinal) {
-                document.getElementById('text').innerHTML = result[0].transcript;
-                window.open('https://yandex.ru/search/?text=' + result[0].transcript + "&lang=ru")
-            } else {
-                document.getElementById('text').innerHTML = result[0].transcript;
+            // Какой язык будем распознавать?
+            recognizer.lang = 'ru-Ru';
+
+            // Используем колбек для обработки результатов
+            recognizer.onresult = function(event) {
+                var result = event.results[event.resultIndex];
+                if (result.isFinal) {
+                    document.getElementById('text').value = '';
+                    document.getElementById('box').innerHTML += '<div class="messege me"> <p>' + result[0].transcript + '</p></div>';
+                    //window.open('https://yandex.ru/search/?text=' + result[0].transcript + "&lang=ru")
+                } else {
+                    document.getElementById('text').value = result[0].transcript;
+                }
+            };
+
+            function speech() {
+                // Начинаем слушать микрофон и распознавать голос
+                recognizer.start();
             }
-        };
-
-        function speech() {
-            // Начинаем слушать микрофон и распознавать голос
-            recognizer.start();
-        }
 
 
 
-        function talk() {
-            var synth = window.speechSynthesis;
-            var utterance = new SpeechSynthesisUtterance(document.getElementById('text').innerHTML);
-            synth.speak(utterance);
-        }
+            function talk() {
+                var synth = window.speechSynthesis;
+                var utterance = new SpeechSynthesisUtterance(document.getElementById('text').innerHTML);
+                synth.speak(utterance);
+            }
 
-        function stop() {
-            synth.pause();
-        }
-    </script>
+            function stop() {
+                synth.pause();
+            }
+        </script>
 
 </body>
 
