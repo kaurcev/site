@@ -69,6 +69,13 @@
                         document.getElementById('box').innerHTML += '<div class="messege me"> <p>' + document.getElementById('text').value + '</p></div>';
                         document.getElementById('box').innerHTML += '<div class="messege for"> <p><a href="https://yandex.ru/search/?text=' + a[2] + '&lang=ru">Всё, что найдено по запросу "' + a[2] + '"</a></p></div>';
                         document.getElementById('text').value = '';
+                    } else if (a[0].toLowerCase() == "Скажи") {
+                        document.getElementById('box').innerHTML += '<div class="messege me"> <p>' + document.getElementById('text').value + '</p></div>';
+
+                        var synth = window.speechSynthesis;
+                        var utterance = new SpeechSynthesisUtterance(document.getElementById('text').value.slice(8));
+                        synth.speak(utterance);
+                        document.getElementById('text').value = '';
                     } else {
                         var check = Array.from(document.getElementById('text').value)[0];
                         if (check == "/") {
