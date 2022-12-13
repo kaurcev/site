@@ -123,6 +123,65 @@
                 zoom: 100%;
             }
             
+            .chat {
+                display: flex;
+                flex-direction: column;
+                max-width: 500px;
+                margin: 0 auto;
+                height: 100vh;
+                justify-content: space-between;
+                padding-bottom: 30px;
+            }
+            
+            .box {
+                display: flex;
+                flex-direction: column;
+                justify-content: end;
+                height: 80vh;
+            }
+            
+            .chat .head {
+                background-color: #fff;
+                padding: 10px;
+                text-align: center;
+                font-family: "Raleway-SemiBold";
+            }
+            
+            .inp {
+                display: flex;
+                align-items: center;
+                flex-direction: row;
+                align-content: center;
+                margin-top: 10px;
+            }
+            
+            input {
+                margin: 0px;
+            }
+            
+            .messege p {
+                background-color: #003cff;
+                max-width: 80%;
+                width: fit-content;
+                padding: 8px;
+                color: #fff;
+                border-radius: 15px;
+                margin: 2px;
+            }
+            
+            .messege.me {
+                display: flex;
+                justify-content: right;
+            }
+            
+            .messege.me p {
+                border-bottom-right-radius: 1px;
+            }
+            
+            .messege.for p {
+                border-bottom-left-radius: 1px;
+            }
+            
             button {
                 background-color: #003cff;
                 color: #fff;

@@ -6,82 +6,19 @@
     <title>Распознавание голоса и чтение текста</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/style.css">
-    <style>
-        .chat {
-            display: flex;
-            flex-direction: column;
-            max-width: 500px;
-            margin: 0 auto;
-            height: 100vh;
-            justify-content: space-between;
-            padding-bottom: 30px;
-        }
-        
-        .box {
-            display: flex;
-            flex-direction: column;
-            justify-content: end;
-            height: 100vh;
-        }
-        
-        .chat .head {
-            background-color: #fff;
-            padding: 10px;
-            text-align: center;
-            font-family: "Raleway-SemiBold";
-        }
-        
-        .inp {
-            display: flex;
-            align-items: center;
-            flex-direction: row;
-            align-content: center;
-            margin-top: 10px;
-        }
-        
-        input {
-            margin: 0px;
-        }
-        
-        .messege p {
-            background-color: #003cff;
-            max-width: 80%;
-            width: fit-content;
-            padding: 8px;
-            color: #fff;
-            border-radius: 15px;
-            margin: 2px;
-        }
-        
-        .messege.me {
-            display: flex;
-            justify-content: right;
-        }
-        
-        .messege.me p {
-            border-bottom-right-radius: 1px;
-        }
-        
-        .messege.for p {
-            border-bottom-left-radius: 1px;
-        }
-    </style>
 </head>
 
 <body>
     <div class="chat">
         <div class="head">Ассистент</div>
         <div class="box" id="box">
-            <div class="messege me">
-                <p>Автора рассказов принято именовать новеллистом, а совокупность рассказов— новеллистикой.</p>
-            </div>
             <div class="messege for">
-                <p>Автора рассказов принято именовать новеллистом, а совокупность рассказов— новеллистикой.</p>
+                <p>Чтобы начать вводить, нажмите на "<b>Прослушать</b>" и начните говорить :)</p>
             </div>
 
         </div>
         <div class="inp">
-            <input style="width:100%" id="text"> <button onclick="speech()">Слушать</button>
+            <input style="width:100%" id="text"> <button onclick="speech()">Прослушать</button>
         </div>
         <!--button onclick="speech()">Слушать</button>
         <button onclick="talk()">Проговорить</button>
