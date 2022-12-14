@@ -6,6 +6,7 @@
     <title>Распознавание голоса и чтение текста</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/style.css">
+    <script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
     <style>
         .panel {
             background-color: #222;
@@ -70,6 +71,7 @@
             </div>
         </div>
     </div>
+
     <script>
         let now = new Date();
         var assist = {
@@ -191,6 +193,7 @@
             assist.chat.innerHTML = '<div class="messege hello"><p>Начните пользоваться :)<br><br>Вы можете сделать скриншот сайта с помощью:<br>/screen {Ссылка на любой сайт}<br><br>На данный момент ведется разработка и внедрение приложения на сайт.<br><br>Уже внедрен голосовой ввод, так же поиск по запросу.<br><br>Пример:<br>Что такое {Ваш запрос}<br><br>Свои рекомендации можете предлагать в мой телеграм:<br><a target="_blank" href="https://kaurcev.t.me">Написать мне</a></p></div><hr>';
             localStorage.setItem('save', assist.chat.innerHTML);
         }
+        vkBridge.send('VKWebAppInit');
     </script>
 
 </body>
