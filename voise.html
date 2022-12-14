@@ -60,6 +60,7 @@
     <script src="/qr/generator.js"></script>
 
     <script>
+        let now = new Date();
         var assist = {
             messege: document.getElementById('text'),
             chat: document.getElementById("box"),
@@ -89,12 +90,12 @@
         }
 
         function messege(mess) {
-            assist.chat.innerHTML += '<div class="messege me"> <p>' + mess + '</p></div>';
+            assist.chat.innerHTML += '<div class="messege me"> <p>' + mess + '<br><span class="mini">' + now.getHours() + ':' + now.getMinutes() + '</span></p></div>';
             assist.messege.value = '';
         }
 
         function messegebac(mess) {
-            assist.chat.innerHTML += '<div class="messege for"> <p>' + mess + '</p></div>';
+            assist.chat.innerHTML += '<div class="messege for"> <p>' + mess + '<br><span class="mini">' + now.getHours() + ':' + now.getMinutes() + '</span></p></div>';
             talk(mess);
         }
 
