@@ -50,33 +50,34 @@
                     </div>
                 </div>
             </div>
-            <div class="dop">
+            <!--div class="dop">
                 <div id="share"></div>
                 <iframe src="https://discord.com/widget?id=888102048413937684&theme=dark" width="100%" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
-            </div>
+                </div-->
         </div>
     </main>
     <script src="/assets/wid/share.js"></script>
     <script src="/qr/generator.js"></script>
 
     <script>
-        // Создаем распознаватель
+        var assist = {
+            messege: document.getElementById('text'),
+            chat: document.getElementById("box"),
+            voise: document.getElementById('voise')
+        }
         var recognizer = new webkitSpeechRecognition();
 
-        // Ставим опцию, чтобы распознавание началось ещё до того, как пользователь закончит говорить
         recognizer.interimResults = true;
 
-        // Какой язык будем распознавать?
         recognizer.lang = 'ru-Ru';
 
-        // Используем колбек для обработки результатов
         recognizer.onresult = function(event) {
             var result = event.results[event.resultIndex];
             if (result.isFinal) {
                 deleteA();
                 send();
             } else {
-                document.getElementById('text').value = result[0].transcript;
+                assist.messege.value = result[0].transcript;
                 document.getElementById('texted').innerHTML = result[0].transcript;
             }
         };
@@ -87,38 +88,60 @@
             recognizer.start();
         }
 
+        function messege(mess) {
+            assist.chat.innerHTML += '<div class="messege me"> <p>' + mess + '</p></div>';
+            assist.messege.value = '';
+        }
+
+        function messegebac(mess) {
+            assist.chat.innerHTML += '<div class="messege for"> <p>' + mess + '</p></div>';
+            talk(mess);
+        }
+
+        function API(code) {
+            messege(assist.messege.value);
+            var a = assist.messege.value.split(' ').slice(0, 3);
+            switch (code) {
+                case ("/"):
+                    messegebac("Секунду");
+                    break;
+                case ("/скажи"):
+                    messegebac(assist.messege.value.slice(7));
+                    break;
+                case ("/скриншот"):
+                    messegebac("Делаю скриншот");
+                    assist.chat.innerHTML += '<div class="messege for"> <p><img src="https://mini.s-shot.ru/1024x768/1000/png/?' + a[1].toLowerCase() + '" alt="#"> <br>Скриншот сайта ' + a[1].toLowerCase() + '</p></div>';
+                    break;
+                case ("/дс"):
+                    assist.chat.innerHTML += '<div class="messege for"> <p><iframe src="https://discord.com/widget?id=888102048413937684&theme=dark" width="100%" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe><br>Наш дискорд</p></div>'
+                    break;
+                case ("/очистить"):
+                    clearee();
+                    messegebac("Чат очищен ассистентом");
+                    break;
+                default:
+                    messegebac("Такой команды нет");
+                    break;
+            }
+        }
+
         function send() {
             if (document.getElementById('text').value != "") {
-                a = document.getElementById('text').value.split(' ').slice(0, 100);
-                if (a[0].toLowerCase() == "что" && a[1].toLowerCase() == "такое") {
-                    document.getElementById('box').innerHTML += '<div class="messege me"> <p>' + document.getElementById('text').value + '</p></div>';
-                    document.getElementById('box').innerHTML += '<div class="messege for"> <p><a href="https://yandex.ru/search/?text=' + a[2] + '&lang=ru">Всё, что найдено по запросу "' + a[2] + '"</a></p></div>';
-                    document.getElementById('text').value = '';
-                } else if (a[0].toLowerCase() == "скажи") {
-                    document.getElementById('box').innerHTML += '<div class="messege me"> <p>' + document.getElementById('text').value + '</p></div>';
-                    var synth = window.speechSynthesis;
-                    var utterance = new SpeechSynthesisUtterance(document.getElementById('text').value.slice(6));
-                    synth.speak(utterance);
-                    document.getElementById('text').value = '';
+                var check = Array.from(assist.messege.value)[0];
+                if (check == "/") {
+                    a = assist.messege.value.split(' ').slice(0, 1);
+                    API(a[0].toLowerCase())
+                    assist.messege.value = '';
                 } else {
-                    var check = Array.from(document.getElementById('text').value)[0];
-                    if (check == "/") {
-                        document.getElementById('box').innerHTML += '<div class="messege for"> <p><img src="https://mini.s-shot.ru/1024x768/1000/png/?' + document.getElementById('text').value.slice(8) + '" alt="#"></p></div>';
-                        document.getElementById('text').value = '';
-                    } else {
-                        document.getElementById('box').innerHTML += '<div class="messege me"> <p>' + document.getElementById('text').value + '</p></div>';
-                        document.getElementById('box').innerHTML += '<div class="messege for"> <p>Я пока что не могу дать вам ответ на это(</p></div>';
-                        document.getElementById('text').value = '';
-                    }
+                    messege(assist.messege.value);
+                    messegebac("Я пока что не могу дать вам ответ на это :(")
                 }
-            } else {
-                document.getElementById('box').innerHTML += '<div class="messege for"> <p>Вы нажали на кнопку, не введя текст</p></div>';
             }
-            localStorage.setItem('save', document.getElementById("box").innerHTML);
+            localStorage.setItem('save', assist.chat.innerHTML);
         }
 
         function loadd() {
-            document.getElementById('box').innerHTML = localStorage.getItem('save');
+            assist.chat.innerHTML = localStorage.getItem('save');
             document.getElementById("share").innerHTML = '<div id="qr_code"></div> <p>Поделитесь страницей :)</p>';
             if (document.getElementById('qr_code') != undefined) {
                 const el = (selector) => document.querySelector(selector);
@@ -131,9 +154,9 @@
 
 
 
-        function talk() {
+        function talk(text) {
             var synth = window.speechSynthesis;
-            var utterance = new SpeechSynthesisUtterance(document.getElementById('text').innerHTML);
+            var utterance = new SpeechSynthesisUtterance(text);
             synth.speak(utterance);
         }
 
@@ -144,22 +167,19 @@
         }
 
         function createA() {
-            document.getElementById('voise').style.display = 'flex';
+            assist.voise.style.display = 'flex';
         }
 
         function deleteA() {
-            document.getElementById('voise').style.display = 'none';
+            assist.voise.style.display = 'none';
             document.getElementById('texted').innerHTML = '';
         }
 
         function clearee() {
             localStorage.removeItem('save');
-            document.getElementById("box").innerHTML = '<div class="messege for"><p>Начните пользоваться :)<br><br>Вы можете сделать скриншот сайта с помощью:<br>/screen {Ссылка на любой сайт}<br><br>На данный момент ведется разработка и внедрение приложения на сайт.<br><br>Уже внедрен голосовой ввод, так же поиск по запросу.<br><br>Пример:<br>Что такое {Ваш запрос}<br><br>Свои рекомендации можете предлагать в мой телеграм:<br><a target="_blank" href="https://kaurcev.t.me">Написать мне</a></p></div>';
-            localStorage.setItem('save', document.getElementById("box").innerHTML);
+            assist.chat.innerHTML = '<div class="messege for"><p>Начните пользоваться :)<br><br>Вы можете сделать скриншот сайта с помощью:<br>/screen {Ссылка на любой сайт}<br><br>На данный момент ведется разработка и внедрение приложения на сайт.<br><br>Уже внедрен голосовой ввод, так же поиск по запросу.<br><br>Пример:<br>Что такое {Ваш запрос}<br><br>Свои рекомендации можете предлагать в мой телеграм:<br><a target="_blank" href="https://kaurcev.t.me">Написать мне</a></p></div>';
+            localStorage.setItem('save', assist.chat.innerHTML);
         }
-        const assist = {
-            varsion: '0.0.1',
-        };
     </script>
 
 </body>

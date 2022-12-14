@@ -126,9 +126,9 @@
             .chat {
                 display: flex;
                 flex-direction: column;
-                max-width: 800px;
+                max-width: 700px;
                 margin: 0 auto;
-                height: 90vh;
+                max-height: 85vh;
                 justify-content: space-between;
                 padding-bottom: 30px;
             }
@@ -137,13 +137,13 @@
                 display: flex;
                 flex-direction: column;
                 justify-content: end;
-                height: 90vh;
+                height: 70vh;
                 width: 100%;
             }
             
             .scroll {
                 overflow-y: scroll;
-                height: 80vh;
+                height: 70vh;
                 padding: 2%;
             }
             
@@ -196,6 +196,14 @@
             .messege.me {
                 display: flex;
                 justify-content: right;
+            }
+            
+            .messege img {
+                border-radius: 10px 10px 0px 0px;
+            }
+            
+            .messege iframe {
+                border-radius: 10px 10px 0px 0px;
             }
             
             .messege.me p {
