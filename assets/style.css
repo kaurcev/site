@@ -206,16 +206,40 @@
                 text-align: left;
             }
             
+            .messege.hello p {
+                background: linear-gradient(#003cff, rgb(252, 58, 132));
+                width: 100%;
+                max-width: none;
+                margin: 0 auto;
+                border-radius: 10px;
+            }
+            
             .messege iframe {
                 border-radius: 10px 10px 0px 0px;
             }
             
+            .messege p {
+                min-width: 80px;
+                resize: horizontal;
+            }
+            
             .messege.me p {
                 border-bottom-right-radius: 1px;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
             }
             
             .messege.for p {
                 border-bottom-left-radius: 1px;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+            }
+            
+            hr {
+                border: #dbdbdb 1px solid;
+                border-radius: 10px;
             }
             
             #voise {
