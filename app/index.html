@@ -1,104 +1,164 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <title>Распознавание голоса и чтение текста</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/style.css">
-    <title>Скоро всё будет</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="true">
-    <meta name="robots" content="index,follow" />
-    <meta name="revisit-after" content="4 days" />
-
-    <meta name="owner" content="skaurcev2004@yandex.ru" />
-    <meta name="author" lang="ru" content="Александр Каурцев" />
-
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Александр Каурцев - Личный сайт">
-    <meta property="og:description" content="Александр Каурцев - Веб разработчик и веб дизайнер.">
-    <meta property="og:url" content="http://kaurcev.tk">
-    <meta property="og:image" content="http://mini.s-shot.ru/1280x768/1000/png/?http://kaurcev.tk">
-    <meta property="og:site_name" content="Александр Каурцев">
-    <meta property="og:locale" content="ru_RU">
-
-    <meta property="twitter:card" content="summary_large_image">
-
-    <meta property="twitter:site" content="@kaurcev">
-    <meta property="twitter:creator" content="@kaurcev">
-    <meta property="twitter:image:src" content="http://mini.s-shot.ru/1280x768/1000/png/?http:/kaurcev.tk">
-    <meta name="apple-mobile-web-app-capacity" content="yes">
-    <script>
-        window.yaContextCb = window.yaContextCb || []
-    </script>
-    <script src="https://yandex.ru/ads/system/context.js" async></script>
-    <script type="application/ld+json">
-        {
-            "@context": "http://schema.org",
-            "@type": "Organization",
-            "name": "Александр Каурцев",
-            "url": "http://kaurcev.tk",
-            "sameAs": [
-                "http://vk.com/kaurcev",
-                "https://twitter.com/kaurcev",
-                "https://tiktok.com/@kaurcev",
-                "https://boosty.to/kaurcev",
-                "https://t.me/kaurcev_dev",
-                "https://patreon.com/kaurcev",
-                "https://www.youtube.com/@kaurcev"
-            ]
-        }
-    </script>
 </head>
 
-<body>
-    <header>
-        <div class="header">
-            <a href="/">
-                <img src="/assets/svg/logo.svg">
-            </a>
+<body id="body" onload="loadd()">
+
+    <!--button onclick="speech()">Слушать</button>
+        <button onclick="talk()">Проговорить</button>
+        <button onclick="stop()">Остановить</button
+        
+        
+          <p>Начните пользоваться :)<br><br>Вы можете сделать скриншот сайта с помощью:<br>/screen {Ссылка на любой сайт}<br><br>На данный момент ведется разработка и внедрение приложения на сайт.<br><br>Уже внедрен голосовой ввод, так же поиск по запросу.<br><br>Пример:<br>Что такое {Ваш запрос}<br><br>Свои рекомендации можете предлагать в мой телеграм:<br><a target="_blank" href="https://kaurcev.t.me">Написать мне</a></p>
+        
+        -->
+    <div class="panel">
+        <div id="voise">
+            <div class="panel centered">
+                <h2 id="texted"></h2>
+                <p class="mini">Говорите, ассистент обрабатывает ваш голос </p><button class="aco" onclick="stop()">Стой</button></div>
         </div>
-    </header>
-    <main>
-        <div class="panel">
-            <div class="centered">
-                <h1>Работаем..</h1>
-                <p>Скоро всё будет</p>
+        <div class="chat">
+            <div class="head">Ассистент <button onclick="clearee()">Отчистить историю</button></div>
+            <div class="box">
+                <div class="scroll" id="box">
+
+                </div>
+            </div>
+            <div class="inp">
+                <input style="width:100%" id="text"><span>&nbsp;</span><button onclick="send()">Отправить</button><span>&nbsp;</span><button onclick="speech()">:D</button>
             </div>
         </div>
-    </main>
+    </div>
     <script>
-        (function(m, e, t, r, i, k, a) {
-            m[i] = m[i] || function() {
-                (m[i].a = m[i].a || []).push(arguments)
-            };
-            m[i].l = 1 * new Date();
-            for (var j = 0; j < document.scripts.length; j++) {
-                if (document.scripts[j].src === r) {
-                    return;
+        let now = new Date();
+        var assist = {
+            messege: document.getElementById('text'),
+            chat: document.getElementById("box"),
+            voise: document.getElementById('voise')
+        }
+        var recognizer = new webkitSpeechRecognition();
+
+        recognizer.interimResults = true;
+
+        recognizer.lang = 'ru-Ru';
+
+        recognizer.onresult = function(event) {
+            var result = event.results[event.resultIndex];
+            if (result.isFinal) {
+                deleteA();
+                send();
+            } else {
+                assist.messege.value = result[0].transcript;
+                document.getElementById('texted').innerHTML = result[0].transcript;
+            }
+        };
+
+        function speech() {
+            // Начинаем слушать микрофон и распознавать голос
+            createA();
+            recognizer.start();
+        }
+
+        function messege(mess) {
+            assist.chat.innerHTML += '<div class="messege me"> <p>' + mess + '<br><span class="mini">' + now.getHours() + ':' + now.getMinutes() + '</span></p></div>';
+            assist.messege.value = '';
+        }
+
+        function messegebac(mess) {
+            assist.chat.innerHTML += '<div class="messege for"> <p>' + mess + '<br><span class="mini">' + now.getHours() + ':' + now.getMinutes() + '</span></p></div>';
+            talk(mess);
+        }
+
+        function API(code) {
+            var a = assist.messege.value.split(' ').slice(0, 3);
+            switch (code) {
+                case ("/"):
+                    messegebac("Секунду");
+                    break;
+                case ("/скажи"):
+                    messegebac(assist.messege.value.slice(7));
+                    break;
+                case ("/скриншот"):
+                    messegebac("Делаю скриншот");
+                    assist.chat.innerHTML += '<div class="messege for"> <p><img src="https://mini.s-shot.ru/1024x768/1000/png/?' + a[1].toLowerCase() + '" alt="#"> <br>Скриншот сайта ' + a[1].toLowerCase() + '</p></div>';
+                    break;
+                case ("/дс"):
+                    assist.chat.innerHTML += '<div class="messege for"> <p><iframe src="https://discord.com/widget?id=888102048413937684&theme=dark" width="100%" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe><br>Наш дискорд</p></div>'
+                    break;
+                case ("/очистить"):
+                    clearee();
+                    messegebac("Чат очищен ассистентом");
+                    break;
+                default:
+                    messegebac("Такой команды нет");
+                    break;
+            }
+        }
+
+        function send() {
+            if (document.getElementById('text').value != "") {
+                var check = Array.from(assist.messege.value)[0];
+                if (check == "/") {
+                    a = assist.messege.value.split(' ').slice(0, 1);
+                    API(a[0].toLowerCase())
+                    assist.messege.value = '';
+                } else {
+                    messege(assist.messege.value);
+                    messegebac("Я пока что не могу дать вам ответ на это :(")
                 }
             }
-            k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
-        })
-        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+            localStorage.setItem('save', assist.chat.innerHTML);
+        }
 
-        ym(88768984, "init", {
-            clickmap: true,
-            trackLinks: true,
-            accurateTrackBounce: true,
-            webvisor: true
-        });
+        function loadd() {
+            assist.chat.innerHTML = localStorage.getItem('save');
+            document.getElementById("share").innerHTML = '<div id="qr_code"></div> <p>Поделитесь страницей :)</p>';
+            if (document.getElementById('qr_code') != undefined) {
+                const el = (selector) => document.querySelector(selector);
+                let qrcode = el('#qr_code');
+                let text = window.location.href;
+                qrcode.innerHTML = "";
+                qrcode.append(QRCode.generateHTML(text, {}))
+            }
+        }
+
+
+
+        function talk(text) {
+            var synth = window.speechSynthesis;
+            var utterance = new SpeechSynthesisUtterance(text);
+            synth.speak(utterance);
+        }
+
+        function stop() {
+            deleteA();
+            synth.pause();
+
+        }
+
+        function createA() {
+            assist.voise.style.display = 'flex';
+        }
+
+        function deleteA() {
+            assist.voise.style.display = 'none';
+            document.getElementById('texted').innerHTML = '';
+        }
+
+        function clearee() {
+            localStorage.removeItem('save');
+            assist.chat.innerHTML = '<div class="messege hello"><p>Начните пользоваться :)<br><br>Вы можете сделать скриншот сайта с помощью:<br>/screen {Ссылка на любой сайт}<br><br>На данный момент ведется разработка и внедрение приложения на сайт.<br><br>Уже внедрен голосовой ввод, так же поиск по запросу.<br><br>Пример:<br>Что такое {Ваш запрос}<br><br>Свои рекомендации можете предлагать в мой телеграм:<br><a target="_blank" href="https://kaurcev.t.me">Написать мне</a></p></div><hr>';
+            localStorage.setItem('save', assist.chat.innerHTML);
+        }
     </script>
 
-    <noscript><div><img src="https://mc.yandex.ru/watch/88768984" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js"; import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-analytics.js"; const firebaseConfig = { apiKey: "AIzaSyAOv3Wdhq3aJUPMlLIF3ok1QpB7mr1WvBU",
-        authDomain: "alexsandr-kaurcev.firebaseapp.com", projectId: "alexsandr-kaurcev", storageBucket: "alexsandr-kaurcev.appspot.com", messagingSenderId: "1095166323080", appId: "1:1095166323080:web:2ead5cf0f691e27658b23d", measurementId: "G-YWQSGKG6LF"
-        }; const app = initializeApp(firebaseConfig); const analytics = getAnalytics(app);
-
-    </script>
 </body>
 
 </html>
