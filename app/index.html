@@ -6,6 +6,39 @@
     <title>Распознавание голоса и чтение текста</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/style.css">
+    <style>
+        .panel {
+            background-color: #222;
+            box-shadow: inset 0 -10px 10px 0 #292929;
+            padding: none;
+            width: none;
+            border-radius: 0px;
+            border-radius: none;
+            margin: none;
+            min-height: none;
+            height: 100vh;
+            margin: 0px;
+        }
+        
+        .scroll {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .chat {
+            padding-bottom: 30px;
+            max-width: 90%;
+            height: 100vh;
+        }
+        
+        .chat .head {
+            background-color: #222;
+            color: #fff;
+        }
+    </style>
+
 </head>
 
 <body id="body" onload="loadd()">
